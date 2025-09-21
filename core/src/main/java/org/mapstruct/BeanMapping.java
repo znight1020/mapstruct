@@ -133,6 +133,19 @@ public @interface BeanMapping {
     SubclassExhaustiveStrategy subclassExhaustiveStrategy() default COMPILE_ERROR;
 
     /**
+     * The strategy to apply for mapping collections and maps for this method.
+     * If not configured, the strategy from {@link MapperConfig#collectionMappingStrategy()} or
+     * {@link Mapper#collectionMappingStrategy()} applies, defaulting to
+     * {@link CollectionMappingStrategy#ACCESSOR_ONLY}.
+     * <p>
+     * Overrides settings on {@link MapperConfig} and {@link Mapper}.
+     *
+     * @return collection mapping strategy for this method
+     * @since 1.7
+     */
+    CollectionMappingStrategy collectionMappingStrategy() default CollectionMappingStrategy.ACCESSOR_ONLY;
+
+    /**
      * Specifies the exception type to be thrown when a missing subclass implementation is detected
      * in combination with {@link SubclassMappings}, based on the {@link #subclassExhaustiveStrategy()}.
      * <p>
@@ -223,5 +236,4 @@ public @interface BeanMapping {
      * @see org.mapstruct.control.MappingControl
      */
     Class<? extends Annotation> mappingControl() default MappingControl.class;
-
 }
